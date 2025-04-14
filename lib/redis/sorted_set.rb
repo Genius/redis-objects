@@ -112,7 +112,7 @@ class Redis
                 options[:offset] || options[:limit] || options[:count]
       args[:with_scores] = true if options[:withscores] || options[:with_scores]
 
-      from_redis redis.zrangebyscore(key, min, max, args)
+      from_redis redis.zrangebyscore(key, min, max, **args)
     end
 
     # Returns all the elements in the sorted set at key with a score between max and min
@@ -128,7 +128,7 @@ class Redis
                 options[:offset] || options[:limit] || options[:count]
       args[:with_scores] = true if options[:withscores] || options[:with_scores]
 
-      from_redis redis.zrevrangebyscore(key, max, min, args)
+      from_redis redis.zrevrangebyscore(key, max, min, **args)
     end
 
     # Remove all elements in the sorted set at key with rank between start and end. Start and end are

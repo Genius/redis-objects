@@ -11,8 +11,8 @@ class Redis
     include Redis::Helpers::Serialize
 
     attr_reader :key, :options
-    def initialize(key, *args)
-      super(key, *args)
+    def initialize(key, ...)
+      super(key, ...)
       redis.setnx(key, to_redis(@options[:default])) if @options[:default]
     end
 
@@ -36,11 +36,11 @@ class Redis
 
     def ==(other); value == other end
     def nil?; value.nil? end
-    def as_json(*args); value.as_json *args end
-    def to_json(*args); value.to_json *args end
+    def as_json(...); value.as_json ... end
+    def to_json(...); value.to_json ... end
 
-    def method_missing(*args)
-      self.value.send *args
+    def method_missing(...)
+      self.value.send ...
     end
   end
 end

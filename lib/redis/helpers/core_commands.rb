@@ -3,15 +3,15 @@ class Redis
     # These are core commands that all types share (rename, etc)
     module CoreCommands
       def exists?
-        redis.exists key
+        redis.exists?(key)
       end
-      
+
       def delete
         redis.del key
       end
       alias_method :del, :delete
       alias_method :clear, :delete
-      
+
       def type
         redis.type key
       end
@@ -29,7 +29,7 @@ class Redis
         @key = dest if ret && setkey
         ret
       end
-    
+
       def expire(seconds)
         redis.expire key, seconds
       end

@@ -13,8 +13,8 @@ class Redis
     include Redis::Helpers::CoreCommands
 
     attr_reader :key, :options
-    def initialize(key, *args)
-      super(key, *args)
+    def initialize(key, ...)
+      super(key, ...)
       @options[:start] ||= 0
       redis.setnx(key, @options[:start]) unless @options[:start] == 0 || @options[:init] === false
     end
@@ -81,7 +81,7 @@ class Redis
         end
       EndOverload
     end
-   
+
     private
 
     # Implements atomic increment/decrement blocks
@@ -99,4 +99,3 @@ class Redis
     end
   end
 end
-

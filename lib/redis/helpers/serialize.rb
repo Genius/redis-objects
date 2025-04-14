@@ -1,18 +1,16 @@
 class Redis
   module Helpers
     module Serialize
-      include Marshal
-
       def to_redis(value, marshal=false)
         return value unless options[:marshal] || marshal
         case value
-        when String, Fixnum, Bignum, Float
+        when String, Integer, Float
           value
         else
-          dump(value)
+          Marshal.dump(value)
         end
       end
- 
+
       def from_redis(value, marshal=false)
         # This was removed because we can't reliably determine
         # if a person said @value = "123.4" maybe for space/etc.
@@ -33,7 +31,7 @@ class Redis
         when Hash
           value.inject({}) { |h, (k, v)| h[k] = from_redis(v); h }
         else
-          restore(value) rescue value
+          Marshal.restore(value) rescue value
         end
       end
     end
